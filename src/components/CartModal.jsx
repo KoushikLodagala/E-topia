@@ -3,6 +3,11 @@ import { X, Trash, Plus, Minus } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import toast from 'react-hot-toast';
 
+
+const formatPrice = (price) => {
+  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(price);
+};
+
 export function CartModal({ onClose }) {
   const { cart, removeFromCart, updateQuantity } = useStore();
 
@@ -47,7 +52,8 @@ export function CartModal({ onClose }) {
               
               <div className="flex-1">
                 <h3 className="font-semibold dark:text-white">{item.title}</h3>
-                <p className="text-blue-500">${item.price}</p>
+                {/* <p className="text-blue-500">${item.price}</p> */}
+                <p className="text-blue-500"> {formatPrice(item.price)}</p>
               </div>
 
               <div className="flex items-center gap-2">
@@ -77,11 +83,12 @@ export function CartModal({ onClose }) {
         </div>
 
         <div className="mt-6 border-t pt-4 dark:border-gray-700">
-          <div className="flex justify-between items-center mb-4">
+          <div className="flex justify-between items-center mb-4">  
             <span className="text-lg font-semibold dark:text-white">Total:</span>
-            <span className="text-lg font-bold text-blue-500">${total.toFixed(2)}</span>
+            {/* <span className="text-lg font-bold text-blue-500">${total.toFixed(2)}</span> */}
+            <span className="text-lg font-bold text-blue-500">{formatPrice(total.toFixed(2))}</span>
           </div>
-          
+
           <button
             onClick={handleCheckout}
             className="w-full py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"

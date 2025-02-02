@@ -3,6 +3,10 @@ import { X, ShoppingCart, Star } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import toast from 'react-hot-toast';
 
+const formatPrice = (price) => {
+  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(price);
+};
+
 export function ProductModal({ product, onClose }) {
   const { addToCart } = useStore();
 
@@ -53,7 +57,8 @@ export function ProductModal({ product, onClose }) {
 
             <div className="flex items-center justify-between pt-4">
               <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                ${product.price}
+                {/* ${product.price} */}
+                {formatPrice(product.price)}
               </span>
               <button
                 onClick={handleAddToCart}
